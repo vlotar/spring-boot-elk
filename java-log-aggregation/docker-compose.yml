@@ -1,0 +1,49 @@
+version: '2'
+services:
+
+ web:
+  build: ./target/docker
+  ports:
+   - "8080"
+  links:
+   - logstash
+  networks:
+   - front-tier
+
+ elasticsearch:
+  image: elasticsearch
+  command: elasticsearch -Des.network.host=0.0.0.0
+  ports:
+   - "9200:9200"
+   - "9300:9300"
+  networks:
+   - back-tier
+
+ logstash:
+  image: logstash
+  command: logstash -f /etc/logstash/conf.d/logstash.conf
+  volumes:
+   - ./src/main/logstash/config:/etc/logstash/conf.d
+  ports:
+   - "5000:5000"
+  links:
+   - elasticsearch
+  networks:
+   - front-tier
+   - back-tier
+
+ kibana:
+  image: kibana
+  environment:
+   - ELASTICSEARCH_URL=http://elasticsearch:9200
+  ports:
+   - "5601:5601"
+  links:
+   - elasticsearch
+  networks:
+   - back-tier
+
+
+networks:
+  front-tier:
+  back-tier:
