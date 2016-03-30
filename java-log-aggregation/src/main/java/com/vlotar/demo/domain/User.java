@@ -31,7 +31,6 @@ public class User implements Serializable {
 	private Long id;
 
 	@Column(name = "first_name")
-	//TODO: check NotBlank annotation
 	@NotBlank
 	private String firstName;
 

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 /**
  * @author vlotar
  */
@@ -45,7 +47,7 @@ public class UserController {
 
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public String createUser(@RequestBody User user) {
+	public String createUser(@Valid @RequestBody User user) {
 		LOGGER.debug("Trying to create a user: " + user.toString());
 		Long userId = this.userService.createUser(user);
 		return "{\"id\":" + userId + "}";
@@ -53,7 +55,7 @@ public class UserController {
 
 	@RequestMapping(value = "/{userId}", method = RequestMethod.PUT, produces = "application/json")
 	@ResponseBody
-	public String updateUser(@PathVariable final Long userId, @RequestBody User user) {
+	public String updateUser(@PathVariable final Long userId, @Valid @RequestBody User user) {
 		LOGGER.debug("Trying to update a user: " + user.toString());
 		user.setId(userId);
 		this.userService.updateUser(user);
