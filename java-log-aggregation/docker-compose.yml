@@ -2,7 +2,7 @@ version: '2'
 services:
 
  web:
-  build: ./target/docker
+  image: javalogaggregation_web
   ports:
    - "8080"
   links:
