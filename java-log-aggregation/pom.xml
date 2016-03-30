@@ -102,6 +102,7 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.4.3</version>
                 <configuration>
+                    <!--TODO: build proper image-->
                     <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
                     <dockerDirectory>src/main/docker</dockerDirectory>
                     <resources>

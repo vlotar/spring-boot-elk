@@ -18,7 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/users")
-//TODO: inject SWAGER
+//TODO: inject SWAGGER
+//TODO: add tests
 public class UserController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
