@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/users")
 //TODO: inject SWAGGER
-//TODO: add tests
 public class UserController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
@@ -49,7 +48,7 @@ public class UserController {
 	public String createUser(@RequestBody User user) {
 		LOGGER.debug("Trying to create a user: " + user.toString());
 		Long userId = this.userService.createUser(user);
-		return "{\"id\":\"" + userId + "\"}";
+		return "{\"id\":" + userId + "}";
 	}
 
 	@RequestMapping(value = "/{userId}", method = RequestMethod.PUT, produces = "application/json")
@@ -73,4 +72,12 @@ public class UserController {
 		return new Gson().toJson(object);
 	}
 
+	/**
+	 * Sets user service.
+	 *
+	 * @param userService the user service
+	 */
+	void setUserService(final UserService userService) {
+		this.userService = userService;
+	}
 }

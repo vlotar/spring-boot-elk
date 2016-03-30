@@ -9,7 +9,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = JavaLogAggregationApplication.class)
 @WebAppConfiguration
-//TODO: fix the test
 public class JavaLogAggregationApplicationTests {
 
 	@Test

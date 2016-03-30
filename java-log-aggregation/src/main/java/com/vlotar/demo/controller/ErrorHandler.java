@@ -1,6 +1,6 @@
 package com.vlotar.demo.controller;
 
-import com.vlotar.demo.exception.NotFoundException;
+import com.vlotar.demo.exception.ResourceNotFoundException;
 import com.vlotar.demo.exception.OperationNotAcceptableException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
+ * Generic error handling mechanism.
+ *
  * @author vlotar
  */
 @ControllerAdvice
@@ -19,9 +21,9 @@ public class ErrorHandler {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ErrorHandler.class);
 
 	@ResponseStatus(HttpStatus.NOT_FOUND)  // 404
-	@ExceptionHandler(NotFoundException.class)
+	@ExceptionHandler(ResourceNotFoundException.class)
 	@ResponseBody
-	public String handleNotFound(NotFoundException ex) {
+	public String handleNotFound(ResourceNotFoundException ex) {
 		LOGGER.warn("Entity was not found", ex);
 		return "{\"errorCode\":\"E0001\"}";
 	}
