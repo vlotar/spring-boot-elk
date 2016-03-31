@@ -1,5 +1,6 @@
 package com.vlotar.demo.domain;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -26,18 +27,22 @@ public class User implements Serializable {
 
 	private static final long serialVersionUID = -1674204092853306884L;
 
+	@ApiModelProperty(value = "Unique user identifier")
 	@Id
 	@GeneratedValue
 	private Long id;
 
+	@ApiModelProperty(value = "User's first name", required = true)
 	@Column(name = "first_name")
 	@NotBlank
 	private String firstName;
 
+	@ApiModelProperty(value = "User's last name", required = true)
 	@Column(name = "last_name")
 	@NotBlank
 	private String lastName;
 
+	@ApiModelProperty(value = "Country where user's living", required = true)
 	@Column(name = "country")
 	@NotBlank
 	private String country;

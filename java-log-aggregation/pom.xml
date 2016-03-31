@@ -24,6 +24,7 @@
     </properties>
 
     <dependencies>
+        <!--Spring Boot-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -31,11 +32,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-rest</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.16.6</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -46,11 +42,20 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!--Lombok framework-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.6</version>
+        </dependency>
+
+        <!--Embedded H2 database-->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -67,6 +72,7 @@
             <artifactId>gson</artifactId>
         </dependency>
 
+        <!--This dependency is required for logback/logstash integration-->
         <dependency>
             <groupId>net.logstash.logback</groupId>
             <artifactId>logstash-logback-encoder</artifactId>
@@ -85,6 +91,19 @@
                     <artifactId>logback-access</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <!--Swagger/Spring integration-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.4.0</version>
+        </dependency>
+        <!--Swagger UI-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.4.0</version>
         </dependency>
 
     </dependencies>

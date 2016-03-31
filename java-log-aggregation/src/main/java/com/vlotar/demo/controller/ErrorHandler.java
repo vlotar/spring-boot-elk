@@ -1,7 +1,7 @@
 package com.vlotar.demo.controller;
 
-import com.vlotar.demo.exception.ResourceNotFoundException;
 import com.vlotar.demo.exception.OperationNotAcceptableException;
+import com.vlotar.demo.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -25,7 +25,7 @@ public class ErrorHandler {
 	@ResponseBody
 	public String handleNotFound(ResourceNotFoundException ex) {
 		LOGGER.warn("Entity was not found", ex);
-		return "{\"errorCode\":\"E0001\"}";
+		return "{\"errorCode\":\"E0001\", \"errorMessage\":\"" + ex.getMessage() + "\"}";
 	}
 
 	@ResponseStatus(HttpStatus.NOT_ACCEPTABLE)  // 406
@@ -33,6 +33,6 @@ public class ErrorHandler {
 	@ResponseBody
 	public String handleNotFound(OperationNotAcceptableException ex) {
 		LOGGER.warn("Operation cannot be performed", ex);
-		return "{\"errorCode\":\"E0002\"}";
+		return "{\"errorCode\":\"E0002\", \"errorMessage\":\"" + ex.getMessage() + "\"}";
 	}
 }
