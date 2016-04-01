@@ -3,7 +3,6 @@ package com.vlotar.demo.service;
 import com.google.common.collect.Lists;
 import com.vlotar.demo.dao.UserDAO;
 import com.vlotar.demo.domain.User;
-import com.vlotar.demo.exception.OperationNotAcceptableException;
 import com.vlotar.demo.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,10 +51,6 @@ public class UserService {
 	 */
 	@Transactional
 	public Long createUser(final User user) {
-		//client should not specify userId while creating new user
-		if (user.getId() != null) {
-			throw new OperationNotAcceptableException(String.format("Cannot create user with Id: %s", user.getId()));
-		}
 		//persist new user and return user identifier
 		return this.userDAO.save(user).getId();
 	}

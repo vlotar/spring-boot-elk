@@ -1,7 +1,8 @@
-package com.vlotar.demo.controller;
+package com.vlotar.demo.web.controller;
 
 import com.vlotar.demo.domain.User;
 import com.vlotar.demo.service.UserService;
+import com.vlotar.demo.service.converter.UserResourceConverter;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -36,6 +37,9 @@ public class UserControllerTest {
 		this.userService = Mockito.mock(UserService.class);
 		userController.setUserService(this.userService);
 
+		final UserResourceConverter converter = new UserResourceConverter();
+		userController.setConverter(converter);
+
 		this.mockMvc = MockMvcBuilders.standaloneSetup(userController, errorHandler).build();
 	}
 
@@ -67,7 +71,8 @@ public class UserControllerTest {
 	@Test
 	public void updateUser() throws Exception {
 		this.userService.updateUser(Mockito.any());
-		this.mockMvc.perform(put("/users/1").contentType(APPLICATION_JSON_UTF8).content("{\"firstName\":\"Mickey\", \"lastName\":\"Mouse\", \"country\":\"UA\"}"))
+		this.mockMvc.perform(
+				put("/users/1").contentType(APPLICATION_JSON_UTF8).content("{\"id\":1,\"firstName\":\"Mickey\", \"lastName\":\"Mouse\", \"country\":\"UA\"}"))
 				.andExpect(status().isOk())
 				.andExpect(content().string("{\"status\":\"success\"}"));
 	}

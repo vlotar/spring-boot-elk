@@ -2,7 +2,6 @@ package com.vlotar.demo.service;
 
 import com.vlotar.demo.dao.UserDAO;
 import com.vlotar.demo.domain.User;
-import com.vlotar.demo.exception.OperationNotAcceptableException;
 import com.vlotar.demo.exception.ResourceNotFoundException;
 import org.junit.Assert;
 import org.junit.Before;
@@ -61,13 +60,6 @@ public class UserServiceTest {
 		});
 
 		Assert.assertEquals(1, this.userService.createUser(user).longValue());
-	}
-
-	@Test(expected = OperationNotAcceptableException.class)
-	public void createUser_notAcceptable() throws Exception {
-		User user = new User();
-		user.setId(1L);
-		this.userService.createUser(user);
 	}
 
 	@Test
