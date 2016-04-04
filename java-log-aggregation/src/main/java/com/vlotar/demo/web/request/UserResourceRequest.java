@@ -15,7 +15,7 @@ import java.io.Serializable;
  */
 @Getter
 @Setter
-public class CreateUserRequest implements Serializable {
+public class UserResourceRequest implements Serializable {
 
 	private static final long serialVersionUID = 2657944775357946081L;
 

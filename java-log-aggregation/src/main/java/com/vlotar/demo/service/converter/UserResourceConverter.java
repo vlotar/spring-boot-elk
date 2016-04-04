@@ -1,16 +1,14 @@
 package com.vlotar.demo.service.converter;
 
 import com.vlotar.demo.domain.User;
-import com.vlotar.demo.web.request.CreateUserRequest;
-import com.vlotar.demo.web.request.UpdateUserRequest;
+import com.vlotar.demo.web.request.UserResourceRequest;
 import com.vlotar.demo.web.response.UserResourceResponse;
 import org.springframework.stereotype.Component;
 
 /**
  * Helper class which is responsible for converting domain {@link User} entity to some DTO objects.
  * {@link UserResourceResponse}
- * {@link CreateUserRequest}
- * {@link UpdateUserRequest}
+ * {@link UserResourceRequest}
  *
  * @author vlotar
  */
@@ -28,31 +26,31 @@ public class UserResourceConverter {
 	}
 
 	/**
-	 * Converts {@link CreateUserRequest} to a domain {@link User}.
+	 * Converts {@link UserResourceRequest} to a domain {@link User}.
 	 *
-	 * @param request {@link CreateUserRequest}
+	 * @param request {@link UserResourceRequest}
 	 * @return {@link User}
 	 */
-	public User convert(final CreateUserRequest request) {
+	public User convert(final UserResourceRequest request) {
 		final User user = new User();
 		convertCommonFields(request, user);
 		return user;
 	}
 
 	/**
-	 * Converts {@link UpdateUserRequest} to a domain {@link User}.
+	 * Converts {@link UserResourceRequest} to a domain {@link User}.
 	 *
-	 * @param request {@link UpdateUserRequest}
+	 * @param request {@link UserResourceRequest}
 	 * @return {@link User}
 	 */
-	public User convert(final UpdateUserRequest request) {
+	public User convert(final UserResourceRequest request, final Long userId) {
 		final User user = new User();
-		user.setId(request.getId());
+		user.setId(userId);
 		convertCommonFields(request, user);
 		return user;
 	}
 
-	private void convertCommonFields(final CreateUserRequest request, final User user) {
+	private void convertCommonFields(final UserResourceRequest request, final User user) {
 		user.setFirstName(request.getFirstName());
 		user.setLastName(request.getLastName());
 		user.setCountry(request.getCountry());

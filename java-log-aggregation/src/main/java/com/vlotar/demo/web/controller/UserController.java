@@ -3,8 +3,7 @@ package com.vlotar.demo.web.controller;
 import com.google.gson.Gson;
 import com.vlotar.demo.service.UserService;
 import com.vlotar.demo.service.converter.UserResourceConverter;
-import com.vlotar.demo.web.request.CreateUserRequest;
-import com.vlotar.demo.web.request.UpdateUserRequest;
+import com.vlotar.demo.web.request.UserResourceRequest;
 import com.vlotar.demo.web.response.ResourceIdResponse;
 import com.vlotar.demo.web.response.SuccessResponse;
 import com.vlotar.demo.web.response.UserResourceResponse;
@@ -73,7 +72,7 @@ import java.util.stream.Collectors;
 	)
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public String createUser(@Valid @RequestBody CreateUserRequest request) {
+	public String createUser(@Valid @RequestBody UserResourceRequest request) {
 		LOGGER.debug("Trying to create a request: " + request.toString());
 		Long userId = this.userService.createUser(this.converter.convert(request));
 		return toJson(new ResourceIdResponse(userId));
@@ -87,10 +86,9 @@ import java.util.stream.Collectors;
 	@RequestMapping(value = "/{userId}", method = RequestMethod.PUT, produces = "application/json")
 	@ResponseBody
 	public String updateUser(@ApiParam(value = "Unique 'request' identifier") @PathVariable final Long userId,
-									 @Valid @RequestBody UpdateUserRequest request) {
+									 @Valid @RequestBody UserResourceRequest request) {
 		LOGGER.debug("Trying to update a request: " + request.toString());
-		request.setId(userId);
-		this.userService.updateUser(this.converter.convert(request));
+		this.userService.updateUser(this.converter.convert(request, userId));
 		return toJson(new SuccessResponse());
 	}
 

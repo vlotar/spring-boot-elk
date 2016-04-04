@@ -72,7 +72,7 @@ public class UserControllerTest {
 	public void updateUser() throws Exception {
 		this.userService.updateUser(Mockito.any());
 		this.mockMvc.perform(
-				put("/users/1").contentType(APPLICATION_JSON_UTF8).content("{\"id\":1,\"firstName\":\"Mickey\", \"lastName\":\"Mouse\", \"country\":\"UA\"}"))
+				put("/users/1").contentType(APPLICATION_JSON_UTF8).content("{\"firstName\":\"Mickey\", \"lastName\":\"Mouse\", \"country\":\"UA\"}"))
 				.andExpect(status().isOk())
 				.andExpect(content().string("{\"status\":\"success\"}"));
 	}

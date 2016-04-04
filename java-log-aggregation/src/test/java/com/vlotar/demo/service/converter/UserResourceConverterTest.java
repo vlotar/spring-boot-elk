@@ -1,8 +1,7 @@
 package com.vlotar.demo.service.converter;
 
 import com.vlotar.demo.domain.User;
-import com.vlotar.demo.web.request.CreateUserRequest;
-import com.vlotar.demo.web.request.UpdateUserRequest;
+import com.vlotar.demo.web.request.UserResourceRequest;
 import com.vlotar.demo.web.response.UserResourceResponse;
 import org.junit.Assert;
 import org.junit.Before;
@@ -36,7 +35,7 @@ public class UserResourceConverterTest {
 
 	@Test
 	public void convertCreateUserRequestToUser() throws Exception {
-		CreateUserRequest request = new CreateUserRequest();
+		UserResourceRequest request = new UserResourceRequest();
 		request.setFirstName("Mickey");
 		request.setLastName("Mouse");
 		request.setCountry("UA");
@@ -50,13 +49,12 @@ public class UserResourceConverterTest {
 
 	@Test
 	public void convertUpdateUserRequestToUser() throws Exception {
-		UpdateUserRequest request = new UpdateUserRequest();
-		request.setId(1L);
+		UserResourceRequest request = new UserResourceRequest();
 		request.setFirstName("Mickey");
 		request.setLastName("Mouse");
 		request.setCountry("UA");
 
-		User user = this.converter.convert(request);
+		User user = this.converter.convert(request, 1L);
 		Assert.assertEquals("Mickey", user.getFirstName());
 		Assert.assertEquals("Mouse", user.getLastName());
 		Assert.assertEquals("UA", user.getCountry());
