@@ -73,7 +73,7 @@ import java.util.stream.Collectors;
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public String createUser(@Valid @RequestBody UserResourceRequest request) {
-		LOGGER.debug("Trying to create a request: " + request.toString());
+		LOGGER.debug("Trying to create a user: " + request.toString());
 		Long userId = this.userService.createUser(this.converter.convert(request));
 		return toJson(new ResourceIdResponse(userId));
 	}
@@ -87,7 +87,7 @@ import java.util.stream.Collectors;
 	@ResponseBody
 	public String updateUser(@ApiParam(value = "Unique 'request' identifier") @PathVariable final Long userId,
 									 @Valid @RequestBody UserResourceRequest request) {
-		LOGGER.debug("Trying to update a request: " + request.toString());
+		LOGGER.debug("Trying to update a user: " + request.toString());
 		this.userService.updateUser(this.converter.convert(request, userId));
 		return toJson(new SuccessResponse());
 	}
@@ -100,7 +100,7 @@ import java.util.stream.Collectors;
 	@RequestMapping(value = "/{userId}", method = RequestMethod.DELETE, produces = "application/json")
 	@ResponseBody
 	public String deleteUser(@ApiParam(value = "Unique 'request' identifier") @PathVariable final Long userId) {
-		LOGGER.debug("Trying to delete a request: " + userId);
+		LOGGER.debug("Trying to delete a user: " + userId);
 		this.userService.deleteUser(userId);
 		return toJson(new SuccessResponse());
 	}
