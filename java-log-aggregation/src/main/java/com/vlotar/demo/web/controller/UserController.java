@@ -62,7 +62,7 @@ import java.util.stream.Collectors;
 		LOGGER.debug("Trying to retrieve all users");
 		return toJson(
 				this.userService.getAllUsers().stream()
-						.map(user -> this.converter.convert(user)).collect(Collectors.toList()));
+						.map(user -> this.converter.convert(user)).collect(Collectors.toSet()));
 	}
 
 	@ApiOperation(
