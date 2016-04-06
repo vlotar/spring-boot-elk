@@ -3,6 +3,7 @@ package com.vlotar.demo.web.request;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.validator.constraints.NotBlank;
 
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import java.io.Serializable;
  */
 @Getter
 @Setter
+@ToString
 public class UserResourceRequest implements Serializable {
 
 	private static final long serialVersionUID = 2657944775357946081L;
