@@ -42,8 +42,9 @@ http://192.168.99.100:32808/swagger-ui.html#!
 <br />_**Note**: ip address is a docker machine IP address._
 Here you can play with existing REST API.
 
-4. In order to configure Kibana you would need to go to: http://localhost:5601/
-Configure your Kibana and play with your logs.
+4. In order to configure Kibana you would need to go to: 
+<br />http://localhost:5601/ or http://{$DOCKER_HOST_IP}:5601/
+<br />Configure your Kibana and play with your logs.
 <br />_**Note**: For Mac users the port 5601 should be added to Port Forwarding Rules of you Docker Virtual Machine_
 
 ## Stop the app
