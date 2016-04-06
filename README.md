@@ -48,3 +48,6 @@ Configure your Kibana and play with your logs.
 
 ## Stop the app
 Simply type: `docker-compose down`
+
+## Security
+user/user
