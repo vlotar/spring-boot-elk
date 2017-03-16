@@ -3,41 +3,77 @@
 
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
-    <appender name="stash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>logstash:5000</destination>
+     <appender name="stash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+         <destination>logstash:5000</destination>
 
-        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
-            <providers>
-                <mdc/> <!-- MDC variables on the Thread will be written as JSON fields-->
-                <context/> <!--Outputs entries from logback's context -->
-                <version/> <!-- Logstash json format version, the @version field in the output-->
-                <logLevel/>
-                <loggerName/>
+         <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+             <providers>
+                 <mdc/> <!-- MDC variables on the Thread will be written as JSON fields-->
+                 <context/> <!--Outputs entries from logback's context -->
+                 <version/> <!-- Logstash json format version, the @version field in the output-->
+                 <logLevel/>
+                 <loggerName/>
 
-                <pattern>
-                    <pattern>
-                        {
-                        <!-- we can add some custom fields to be sent with all the log entries.-->
-                        <!--make filtering easier in Logstash-->
-                        "appName": "elk-demo",
-                        "appVersion": "1.0"
-                        }
-                    </pattern>
-                </pattern>
+                 <pattern>
+                     <pattern>
+                         {
+                         <!-- we can add some custom fields to be sent with all the log entries.-->
+                         <!--make filtering easier in Logstash-->
+                         "appName": "elk-demo",
+                         "appVersion": "1.0"
+                         }
+                     </pattern>
+                 </pattern>
 
-                <threadName/>
-                <message/>
+                 <threadName/>
+                 <message/>
 
-                <logstashMarkers/> <!-- Useful so we can add extra information for specific log lines as Markers-->
-                <arguments/> <!--or through StructuredArguments-->
+                 <logstashMarkers/> <!-- Useful so we can add extra information for specific log lines as Markers-->
+                 <arguments/> <!--or through StructuredArguments-->
 
-                <stackTrace/>
-            </providers>
-        </encoder>
+                 <stackTrace/>
+             </providers>
+         </encoder>
+     </appender>
+
+    <appender name="RabbitMq" class="org.springframework.amqp.rabbit.logback.AmqpAppender">
+        <layout>
+            <pattern>
+                {
+                "time": "%date{ISO8601}",
+                "thread": "%thread",
+                "level": "%level",
+                "class": "%logger{36}",
+                "message": "%message"
+                "mdc": "%mdc",
+                "req.requestURI": "%mdc{req.requestURI}",
+                "req.method": "%mdc{req.method}",
+                "req.remoteHost": "%mdc{req.remoteHost}",
+                "req.requestURL": "%mdc{req.requestURL}",
+                "req.userAgent": "%mdc{req.userAgent}"
+                }
+            </pattern>
+        </layout>
+        <host>localhost</host>
+        <port>5672</port>
+        <username>guest</username>
+        <password>guest</password>
+        <exchangeType>topic</exchangeType>
+        <exchangeName>logs.elkDemo</exchangeName>
+        <applicationId>elkDemo</applicationId>
+        <routingKeyPattern>%property{applicationId}.%c.%p</routingKeyPattern>
+        <generateId>true</generateId>
+        <charset>UTF-8</charset>
+        <durable>true</durable>
+        <abbreviation>36</abbreviation>
+        <deliveryMode>NON_PERSISTENT</deliveryMode>
+        <declareExchange>true</declareExchange>
+
     </appender>
 
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="RabbitMq"/>
         <appender-ref ref="stash"/>
     </root>
 
