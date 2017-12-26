@@ -42,6 +42,14 @@ http://192.168.99.100:32808/swagger-ui.html#!
 <br />_**Note**: ip address is a docker machine IP address._
 Here you can play with existing REST API.
 
+If there is an error that elasticsearch conntainer not run, may be because of "max virtual memory areas vm.max_map_count [65530] likely too low, increase to at least [262144]"
+
+To fix it, run: 
+
+`sudo sysctl -w vm.max_map_count=262144`
+
+https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode
+
 4. In order to configure Kibana you would need to go to: 
 <br />http://localhost:5601/ or http://{$DOCKER_HOST_IP}:5601/
 <br />Configure your Kibana and play with your logs.
