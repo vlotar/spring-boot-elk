@@ -48,7 +48,7 @@ To fix it, run:
 
 `sudo sysctl -w vm.max_map_count=262144`
 
-https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode
+https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
 
 4. In order to configure Kibana you would need to go to: 
 <br />http://localhost:5601/ or http://{$DOCKER_HOST_IP}:5601/
